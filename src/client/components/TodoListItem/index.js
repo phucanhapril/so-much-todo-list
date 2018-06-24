@@ -17,7 +17,7 @@ const TodoListItem = ({ onClear, onComplete, todo }) => (
       { todo.text }
     </p>
     <i
-      className="TodoListItem__remove material-icons"
+      className="TodoListItem__clear material-icons"
       onClick={() => onClear(todo)}
     >
       clear

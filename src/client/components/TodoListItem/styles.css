@@ -1,26 +1,32 @@
 .TodoListItem {
+  align-items: center;
   display: flex;
   justify-content: center;
+  margin-bottom: 12px;
+}
+
+label.TodoListItem__checkbox {
+  margin: 0 8px 0 12px;
+}
+
+.TodoListItem__checkbox:hover div {
+  border-color: #64bcae;
 }
 
 .TodoListItem__label {
-  margin: 0 8px 8px 0;
+  margin: 0 8px 0 0;
 }
 
 .TodoListItem__label--completed {
   color: #d3d3d3;
 }
 
-.TodoListItem__checkbox {
-  margin: 0 8px 0 0;
-}
-
-.TodoListItem__remove {
+.TodoListItem__clear {
   cursor: pointer;
   font-size: 12px;
-  margin-top: 4px;
+  margin-right: 12px;
 }
 
-.TodoListItem__remove:hover {
+.TodoListItem__clear:hover {
   color: #64bcae;
 }
