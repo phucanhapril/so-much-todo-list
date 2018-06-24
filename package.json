@@ -24,7 +24,6 @@
   },
   "reactToolbox": {
     "include": [
-      "BUTTON",
       "CHECKBOX",
       "INPUT"
     ],

@@ -8,13 +8,8 @@ import './styles.css';
 class Todo extends Component {
   constructor(props) {
     super(props);
-    // TODO move to redux if time permits
     this.state = {
-      todos: [
-        { id: 0, text: 'coding assignment', completed: false },
-        { id: 1, text: 'clean the house', completed: false },
-        { id: 2, text: 'create redux-saga tutorial', completed: false }
-      ]
+      todos: []
     };
   }
 
