@@ -11,40 +11,37 @@ class Todo extends Component {
     // TODO move to redux if time permits
     this.state = {
       todos: [
-        { id: 0, text: 'coding assignment', done: false },
-        { id: 1, text: 'clean the house', done: false },
-        { id: 2, text: 'create redux-saga tutorial', done: false }
+        { id: 0, text: 'coding assignment', completed: false },
+        { id: 1, text: 'clean the house', completed: false },
+        { id: 2, text: 'create redux-saga tutorial', completed: false }
       ]
     };
   }
-  
-  handleItemAdd = text => {
-    const { todos } = this.state;
-    const maxID = todos.reduce(TodoUtils.getMaxID, 0);
-    this.setState({
+
+  handleTodos = {
+    add: text => this.setState({
       todos: [
-        ...todos,
-        { id: maxID + 1, text, done: false }
+        ...this.state.todos,
+        {
+          id: this.state.todos.reduce(TodoUtils.getMaxID, 0) + 1,
+          text,
+          completed: false
+        }
       ]
-    });
-  }
-  
-  handleItemRemove = item => {
-    const { todos } = this.state;
-    this.setState({
-      todos: todos.filter(t => t.id !== item.id)
-    });
-  }
-  
-  handleItemCheckbox = item => {
-    const { todos } = this.state;
-    this.setState({
+    }),
+    completeOne: todo => this.setState({
       todos: [
-        ...todos.filter(t => t.id !== item.id),
-        { ...item, done: !item.done }
+        ...this.state.todos.filter(t => t.id !== todo.id),
+        { ...todo, completed: !todo.completed }
       ]
-    });
-  }
+    }),
+    clearOne: todo => this.setState({
+      todos: this.state.todos.filter(t => t.id !== todo.id)
+    }),
+    clearCompleted: () => this.setState({
+      todos: this.state.todos.filter(t => !t.completed)
+    })
+  };
 
   render() {
     const { todos } = this.state;
@@ -55,10 +52,11 @@ class Todo extends Component {
           <span role="img" aria-label="snail"> 🐌</span>
         </h1>
         <TodoList
-          items={todos}
-          onItemAdd={this.handleItemAdd}
-          onItemRemove={this.handleItemRemove}
-          onItemCheckboxClick={this.handleItemCheckbox}
+          todos={todos}
+          onTodoAdd={this.handleTodos.add}
+          onTodoComplete={this.handleTodos.completeOne}
+          onTodoClear={this.handleTodos.clearOne}
+          onClearCompleted={this.handleTodos.clearCompleted}
         />
       </div>
     );

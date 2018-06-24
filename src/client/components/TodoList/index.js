@@ -14,32 +14,53 @@ class TodoList extends Component {
   }
 
   render() {
-    const { items, onItemAdd, onItemRemove, onItemCheckboxClick } = this.props;
+    const {
+      onClearCompleted,
+      onTodoComplete,
+      onTodoAdd,
+      onTodoClear,
+      todos
+    } = this.props;
     const { newTodo } = this.state;
+    const activeTodos = todos.filter(t => !t.completed);
     return (
       <div className="TodoList">
-        <div className="TodoList__add-item">
+        <div className="TodoList__add-todo">
           <Input
-            className="TodoList__add-item-input"
+            className="TodoList__add-todo-input"
             type="text"
             label="Add something to do..."
             value={newTodo}
             onChange={value => this.setState({ newTodo: value })}
             onKeyPress={e => {
               if (e.key === 'Enter' && newTodo.trim() !== '') {
-                onItemAdd(newTodo);
+                onTodoAdd(newTodo);
                 this.setState({ newTodo: '' });
               }
             }}
           />
         </div>
-        <div className="TodoList__items">
-          {items.sort(TodoUtils.compareByID).map(item => (
+        <div className="TodoList__toolbar">
+          <span>
+            {activeTodos.length
+              ? `${activeTodos.length} thing${activeTodos.length > 1 ? 's' : ''} `
+              : 'Nothing '
+            }to do!
+          </span>
+          <span
+            className="TodoList__clear-completed"
+            onClick={() => onClearCompleted()}
+          >
+            Clear completed
+          </span>
+        </div>
+        <div className="TodoList__todos">
+          {todos.sort(TodoUtils.compareByID).map(todo => (
             <TodoListItem
-              item={item}
-              onCheckboxClick={onItemCheckboxClick}
-              onRemove={onItemRemove}
-              key={item.id}
+              todo={todo}
+              onComplete={onTodoComplete}
+              onClear={onTodoClear}
+              key={todo.id}
             />
           ))}
         </div>
@@ -49,19 +70,22 @@ class TodoList extends Component {
 }
 
 TodoList.defaultProps = {
-  onItemAdd: () => {},
-  onItemCheckboxClick: () => {}
+  onClearCompleted: () => {},
+  onTodoAdd: () => {},
+  onTodoClear: () => {},
+  onTodoComplete: () => {}
 };
 
 TodoList.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.shape({
+  onClearCompleted: PropTypes.func,
+  onTodoAdd: PropTypes.func,
+  onTodoClear: PropTypes.func,
+  onTodoComplete: PropTypes.func,
+  todos: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
     text: PropTypes.string,
-    done: PropTypes.bool
-  })).isRequired,
-  onItemAdd: PropTypes.func,
-  onItemRemove: PropTypes.func,
-  onItemCheckboxClick: PropTypes.func
+    completed: PropTypes.bool
+  })).isRequired
 };
 
 export default TodoList;

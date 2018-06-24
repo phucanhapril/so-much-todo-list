@@ -1,4 +1,24 @@
-.TodoList__add-item-input {
+.TodoList__add-todo-input {
   margin: auto;
   width: 60%;
+}
+
+div.TodoList__add-todo-input {
+  padding-bottom: 2px;
+}
+
+.TodoList__toolbar {
+  display: flex;
+  font-size: 12px;
+  justify-content: space-between;
+  margin: 0 auto 16px auto;
+  width: 60%;
+}
+
+.TodoList__clear-completed {
+  cursor: pointer;
+}
+
+.TodoList__clear-completed:hover {
+  color: #64bcae;
 }

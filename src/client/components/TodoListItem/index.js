@@ -4,21 +4,21 @@ import cx from 'classnames';
 import Checkbox from 'react-toolbox/lib/checkbox/Checkbox';
 import './styles.css';
 
-const TodoListItem = ({ item, onCheckboxClick, onRemove }) => (
+const TodoListItem = ({ onClear, onComplete, todo }) => (
   <div className="TodoListItem">
     <Checkbox
       className="TodoListItem__checkbox"
-      checked={item.done}
-      onChange={() => onCheckboxClick(item)}
+      checked={todo.completed}
+      onChange={() => onComplete(todo)}
     />
     <p className={cx('TodoListItem__label', {
-      'TodoListItem__label--done': item.done
+      'TodoListItem__label--completed': todo.completed
     })}>
-      { item.text }
+      { todo.text }
     </p>
     <i
       className="TodoListItem__remove material-icons"
-      onClick={() => onRemove(item)}
+      onClick={() => onClear(todo)}
     >
       clear
     </i>
@@ -26,18 +26,18 @@ const TodoListItem = ({ item, onCheckboxClick, onRemove }) => (
 );
 
 TodoListItem.defaultProps = {
-  onCheckboxClick: () => {},
-  onRemove: () => {}
+  onClear: () => {},
+  onComplete: () => {}
 };
 
 TodoListItem.propTypes = {
-  item: PropTypes.shape({
+  onClear: PropTypes.func,
+  onComplete: PropTypes.func,
+  todo: PropTypes.shape({
     id: PropTypes.number,
     text: PropTypes.string,
-    done: PropTypes.bool
-  }).isRequired,
-  onCheckboxClick: PropTypes.func,
-  onRemove: PropTypes.func,
+    completed: PropTypes.bool
+  }).isRequired
 };
 
 export default TodoListItem;
