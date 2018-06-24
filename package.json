@@ -1,0 +1,42 @@
+{
+  "name": "my-razzle-app",
+  "version": "2.0.0-alpha.8",
+  "license": "MIT",
+  "scripts": {
+    "start": "razzle start",
+    "build": "razzle build",
+    "test": "razzle test --env=jsdom",
+    "start:prod": "NODE_ENV=production node build/server.js",
+    "pretty": "prettier --write --single-quote \"src/**/*.js\"",
+    "toolbox": "react-toolbox-themr"
+  },
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "express": "4.16.3",
+    "razzle": "2.1.0",
+    "react": "16.4.0",
+    "react-dom": "16.4.0",
+    "react-router-dom": "4.3.1",
+    "react-toolbox": "^2.0.0-beta.13"
+  },
+  "devDependencies": {
+    "react-toolbox-themr": "^1.0.2"
+  },
+  "reactToolbox": {
+    "include": [
+      "BUTTON",
+      "CHECKBOX",
+      "DIALOG",
+      "DROPDOWN",
+      "INPUT",
+      "SWITCH"
+    ],
+    "customProperties": {
+      "animation-duration": "0.2s",
+      "color-primary": "#64bcae",
+      "color-primary-dark": "#3cad9b",
+      "preferred-font": "'Karla', sans-serif"
+    },
+    "output": "src/assets/react-toolbox"
+  }
+}
