@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TodoList from '../../components/TodoList';
+import { TodoUtils } from '../../../utils';
 
 import '../../../assets/react-toolbox/theme.css';
 import './styles.css';
@@ -9,7 +10,7 @@ class Todo extends Component {
     super(props);
     // TODO move to redux
     this.state = {
-      todo: [
+      todos: [
         { id: 0, text: 'coding assignment', done: false },
         { id: 1, text: 'clean the house', done: false },
         { id: 2, text: 'create redux-saga tutorial', done: false }
@@ -17,26 +18,38 @@ class Todo extends Component {
     };
   }
   
-  handleItemCheckbox = item => {
-    const { todo } = this.state;
+  handleItemAdd = text => {
+    const { todos } = this.state;
+    const maxID = todos.reduce(TodoUtils.getMaxID, 0);
     this.setState({
-      todo: [
-        ...todo.filter(t => t.id !== item.id),
+      todos: [
+        ...todos,
+        { id: maxID + 1, text, done: false }
+      ]
+    });
+  }
+  
+  handleItemCheckbox = item => {
+    const { todos } = this.state;
+    this.setState({
+      todos: [
+        ...todos.filter(t => t.id !== item.id),
         { ...item, done: !item.done }
       ]
     });
   }
 
   render() {
-    const { todo } = this.state;
+    const { todos } = this.state;
     return (
       <div className="Todo">
-        <h1>
-          so much to do list
+        <h1 className="Todo__title">
+          So Much To Do List
           <span role="img" aria-label="snail"> 🐌</span>
         </h1>
         <TodoList
-          items={todo}
+          items={todos}
+          onItemAdd={this.handleItemAdd}
           onItemCheckboxClick={this.handleItemCheckbox}
         />
       </div>

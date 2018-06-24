@@ -1,3 +1,7 @@
 .Todo {
   text-align: center;
 }
+
+.Todo__title {
+  margin-bottom: 0;
+}
