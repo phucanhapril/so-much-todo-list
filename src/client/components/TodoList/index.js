@@ -14,7 +14,7 @@ class TodoList extends Component {
   }
 
   render() {
-    const { items, onItemAdd, onItemCheckboxClick } = this.props;
+    const { items, onItemAdd, onItemRemove, onItemCheckboxClick } = this.props;
     const { newTodo } = this.state;
     return (
       <div className="TodoList">
@@ -38,6 +38,7 @@ class TodoList extends Component {
             <TodoListItem
               item={item}
               onCheckboxClick={onItemCheckboxClick}
+              onRemove={onItemRemove}
               key={item.id}
             />
           ))}
@@ -59,6 +60,7 @@ TodoList.propTypes = {
     done: PropTypes.bool
   })).isRequired,
   onItemAdd: PropTypes.func,
+  onItemRemove: PropTypes.func,
   onItemCheckboxClick: PropTypes.func
 };
 

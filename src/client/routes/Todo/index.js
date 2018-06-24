@@ -8,7 +8,7 @@ import './styles.css';
 class Todo extends Component {
   constructor(props) {
     super(props);
-    // TODO move to redux
+    // TODO move to redux if time permits
     this.state = {
       todos: [
         { id: 0, text: 'coding assignment', done: false },
@@ -26,6 +26,13 @@ class Todo extends Component {
         ...todos,
         { id: maxID + 1, text, done: false }
       ]
+    });
+  }
+  
+  handleItemRemove = item => {
+    const { todos } = this.state;
+    this.setState({
+      todos: todos.filter(t => t.id !== item.id)
     });
   }
   
@@ -50,6 +57,7 @@ class Todo extends Component {
         <TodoList
           items={todos}
           onItemAdd={this.handleItemAdd}
+          onItemRemove={this.handleItemRemove}
           onItemCheckboxClick={this.handleItemCheckbox}
         />
       </div>
