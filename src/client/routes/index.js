@@ -5,12 +5,12 @@ import ThemeProvider from 'react-toolbox/lib/ThemeProvider';
 import theme from '../../assets/react-toolbox/theme';
 import '../../styles/index.css';
 
-import TodoList from './TodoList';
+import Todo from './Todo';
 
 const App = () => (
   <ThemeProvider theme={theme}>
     <Switch>
-      <Route exact path="/" component={TodoList} />
+      <Route exact path="/" component={Todo} />
     </Switch>
   </ThemeProvider>
 );

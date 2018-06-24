@@ -26,10 +26,7 @@
     "include": [
       "BUTTON",
       "CHECKBOX",
-      "DIALOG",
-      "DROPDOWN",
-      "INPUT",
-      "SWITCH"
+      "INPUT"
     ],
     "customProperties": {
       "animation-duration": "0.2s",

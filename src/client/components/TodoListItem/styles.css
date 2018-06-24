@@ -1,0 +1,16 @@
+.TodoListItem {
+  display: flex;
+  justify-content: center;
+}
+
+.TodoListItem__label {
+  margin: 0 8px 8px 0;
+}
+
+.TodoListItem__label--done {
+  color: #d3d3d3;
+}
+
+.TodoListItem__checkbox {
+  margin-bottom: 0;
+}
